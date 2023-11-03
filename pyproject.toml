@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "awtrix-light-client"
+version = "0"
+description = "awtrix-light HTTP client to be used with Ulanzi clock"
+authors = ["Ludovic Ortega <ludovic.ortega@adminafk.fr>"]
+license = "CeCILL"
+readme = "README.md"
+homepage = "https://github.com/M0NsTeRRR/awtrix-light-client"
+repository = "https://github.com/M0NsTeRRR/awtrix-light-client"
+keywords = ["awtrix-light", "awtrix"]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: CEA CNRS Inria Logiciel Libre License, version 2.1 (CeCILL-2.1)",
+    "Topic :: Utilities",
+]
+include = [
+    "LICENSE",
+    "LICENSE.fr",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+httpx = "~0.25.0"
+pydantic = "~2.4.2"
+pydantic-settings = "~2.0.3"
+pydantic-extra-types = "~2.1.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "~23.10.1"
+pytest = "~7.4.3"
+pytest-cov = "~4.1.0"
+pytest-asyncio = "~0.21.1"
+pytest-httpx = "~0.26.0"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

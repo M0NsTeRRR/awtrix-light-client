@@ -1,0 +1,25 @@
+name: Python release
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install poetry & dependencies
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          export PATH="$PATH:$HOME/.local/bin"
+          poetry install
+      - name: Publish package
+        run: |
+          export PATH="$PATH:$HOME/.local/bin"
+          source `poetry env info --path`/bin/activate
+          poetry version $(git describe --tags --abbrev=0)
+          poetry publish --build -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
