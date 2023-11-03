@@ -474,20 +474,16 @@ version = "2.1.0"
 description = "Extra Pydantic types."
 optional = false
 python-versions = ">=3.7"
-files = []
-develop = false
+files = [
+    {file = "pydantic_extra_types-2.1.0-py3-none-any.whl", hash = "sha256:1b8aa83a2986b0bc6a7179834fdb423c5e0bcef6b2b4cd9261bf753ad7dcc483"},
+    {file = "pydantic_extra_types-2.1.0.tar.gz", hash = "sha256:d07b869e733d33712b07d6b8cd7b0223077c23ae5a1e23bd0699a00401259ec7"},
+]
 
 [package.dependencies]
 pydantic = ">=2.0.3"
 
 [package.extras]
-all = ["phonenumbers (>=8,<9)", "pycountry (>=22,<23)", "python-ulid (>=1,<2)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/pydantic/pydantic-extra-types"
-reference = "a973b79"
-resolved_reference = "a973b7942112df731e2618336e55e3343a2e1c32"
+all = ["phonenumbers (>=8,<9)", "pycountry (>=22,<23)"]
 
 [[package]]
 name = "pydantic-settings"
@@ -630,4 +626,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9"
-content-hash = "3e0c8eab642e816d0d04232b312f53cbe40f4524affdeeb10a25722bbc10ff25"
+content-hash = "1a8d6ba10207a4886e725f146860a5aea3b5d5459f06edfa8ce53738f7c511a4"
