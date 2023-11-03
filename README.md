@@ -2,7 +2,7 @@ Python async HTTP client for [awtrix-light](https://github.com/Blueforcer/awtrix
 
 [![PyPI](https://img.shields.io/pypi/v/awtrix-light-client.svg)](https://pypi.python.org/pypi/awtrix-light-client)
 [![PyPI versions](https://img.shields.io/pypi/pyversions/awtrix-light-client.svg)](https://pypi.python.org/pypi/awtrix-light-client)
-[![Python test](https://github.com/napalm-automation-community/awtrix-light-client/actions/workflows/test.yml/badge.svg)](https://github.com/napalm-automation-community/awtrix-light-client/actions/workflows/test.yml)
+[![Python test](https://github.com/M0NsTeRRR/awtrix-light-client/actions/workflows/test.yml/badge.svg)](https://github.com/M0NsTeRRR/awtrix-light-client/actions/workflows/test.yml)
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 # Warning
