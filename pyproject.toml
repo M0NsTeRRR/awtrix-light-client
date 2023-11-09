@@ -31,7 +31,7 @@ pydantic-settings = "~2.0.3"
 pydantic-extra-types = "~2.1.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "~23.10.1"
+black = ">=23.10.1,<23.12.0"
 pytest = "~7.4.3"
 pytest-cov = "~4.1.0"
 pytest-asyncio = "~0.21.1"
