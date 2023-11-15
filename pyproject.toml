@@ -27,7 +27,7 @@ include = [
 python = ">=3.9"
 httpx = "~0.25.0"
 pydantic = ">=2.4.2,<2.6.0"
-pydantic-settings = "~2.0.3"
+pydantic-settings = ">=2.0.3,<2.2.0"
 pydantic-extra-types = "~2.1.0"
 
 [tool.poetry.group.dev.dependencies]
