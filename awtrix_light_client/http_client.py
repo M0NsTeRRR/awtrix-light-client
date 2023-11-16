@@ -35,11 +35,8 @@ class AwtrixLightHttpClient:
         url: str,
         params: Dict[Any, Any] = None,
         data: Dict[Any, Any] = None,
-        json_data: Dict[Any, Any] = None,
     ):
-        r = await self._client.request(
-            method, url, params=params, data=data, json=json_data
-        )
+        r = await self._client.request(method, url, params=params, json=data)
 
         if not r.is_success:
             raise AwtrixLightHttpClientError(
@@ -93,25 +90,25 @@ class AwtrixLightHttpClient:
         """
         Toggle the matrix on or off
         """
-        await self._make_request("POST", "power", json_data={"power": power})
+        await self._make_request("POST", "power", data={"power": power})
 
     async def set_sleep(self, seconds: int) -> None:
         """
         Send the board in deep sleep mode (turns off the matrix as well), good for saving battery life
         """
-        await self._make_request("POST", "sleep", json_data={"sleep": seconds})
+        await self._make_request("POST", "sleep", data={"sleep": seconds})
 
     async def set_sound(self, sound: str) -> None:
         """
         Play a RTTTL sound from the MELODIES folder
         """
-        await self._make_request("POST", "sound", json_data={"sound": sound})
+        await self._make_request("POST", "sound", data={"sound": sound})
 
     async def set_rtttl(self, rtttl: str) -> None:
         """
         Play a RTTTL sound from a given RTTTL string
         """
-        await self._make_request("POST", "rtttl", json_data={"rtttl": rtttl})
+        await self._make_request("POST", "rtttl", data={"rtttl": rtttl})
 
     async def set_moodlight(self, moodlight: Moodlight) -> None:
         """
@@ -119,7 +116,7 @@ class AwtrixLightHttpClient:
         To disable moodlight pass `Moodlight()`
         """
         await self._make_request(
-            "POST", "moodlight", json_data=moodlight.model_dump(exclude_none=True)
+            "POST", "moodlight", data=moodlight.model_dump(exclude_none=True)
         )
 
     async def set_indicator(
@@ -141,18 +138,18 @@ class AwtrixLightHttpClient:
         if blink and fade:
             raise ValueError("fade and blink can't be set together")
 
-        json_data = {"color": as_hex(color, format="long").upper()}
+        data = {"color": as_hex(color, format="long").upper()}
 
         if blink:
-            json_data["blink"] = blink
+            data["blink"] = blink
 
         if fade:
-            json_data["fade"] = fade
+            data["fade"] = fade
 
         await self._make_request(
             "POST",
             f"indicator{indicator}",
-            json_data=json_data,
+            data=data,
         )
 
     async def set_custom_application(
@@ -167,22 +164,18 @@ class AwtrixLightHttpClient:
         To eradicate a single app, direct the command to, for instance, test1
         """
         if isinstance(custom_application, CustomApplication):
-            json_data = custom_application.model_dump(exclude_none=True)
+            data = custom_application.model_dump(exclude_none=True)
         else:
-            json_data = [
-                app.model_dump(exclude_none=True) for app in custom_application
-            ]
+            data = [app.model_dump(exclude_none=True) for app in custom_application]
 
-        await self._make_request(
-            "POST", "custom", params={"name": name}, json_data=json_data
-        )
+        await self._make_request("POST", "custom", params={"name": name}, data=data)
 
     async def notify(self, notification: Notification) -> None:
         """
         One-Time Notification
         """
         await self._make_request(
-            "POST", "notify", json_data=notification.model_dump(exclude_none=True)
+            "POST", "notify", data=notification.model_dump(exclude_none=True)
         )
 
     async def dismiss_notification(self) -> None:
@@ -207,7 +200,7 @@ class AwtrixLightHttpClient:
         """
         Directly transition to a desired app using its name
         """
-        await self._make_request("POST", "switch", json_data={"name": name})
+        await self._make_request("POST", "switch", data={"name": name})
 
     async def get_settings(self) -> Settings:
         """
@@ -220,7 +213,7 @@ class AwtrixLightHttpClient:
         You can initiate the firmware update either through the update button in HA or using the following
         """
         await self._make_request(
-            "POST", "settings", json_data=s.model_dump(exclude_none=True)
+            "POST", "settings", data=s.model_dump(exclude_none=True)
         )
 
     async def update(self) -> None:

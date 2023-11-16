@@ -735,7 +735,7 @@ async def test_set_power(
     )
 
     async with awtrix_http_client as client:
-        assert await client.set_power(False) == None
+        assert await client.set_power(False) is None
 
 
 async def test_set_sleep(
@@ -748,7 +748,7 @@ async def test_set_sleep(
     )
 
     async with awtrix_http_client as client:
-        assert await client.set_sleep(10) == None
+        assert await client.set_sleep(10) is None
 
 
 async def test_set_sound(
@@ -761,7 +761,7 @@ async def test_set_sound(
     )
 
     async with awtrix_http_client as client:
-        assert await client.set_sound("alarm") == None
+        assert await client.set_sound("alarm") is None
 
 
 async def test_set_rtttl(
@@ -780,7 +780,7 @@ async def test_set_rtttl(
             await client.set_rtttl(
                 "JingleBell:d=8,o=5,b=112:32p,a,a,4a,a,a,4a,a,c6,f.,16g,2a,a#,a#,a#.,16a#,a#,a,a.,16a,a,g,g,a,4g,4c6"
             )
-            == None
+            is None
         )
 
 
@@ -803,7 +803,7 @@ async def test_set_moodlight(
             await client.set_moodlight(
                 Moodlight(brightness=170, color=Color("#FF00FF"))
             )
-            == None
+            is None
         )
 
 
@@ -814,7 +814,7 @@ async def test_wrong_indicator_param(
         async with awtrix_http_client as client:
             assert (
                 await client.set_indicator(2, color=Color("#FF00FF"), fade=2, blink=2)
-                == None
+                is None
             )
 
 
@@ -828,7 +828,7 @@ async def test_set_indicator(
     )
 
     async with awtrix_http_client as client:
-        assert await client.set_indicator(2, color=Color("#FF00FF"), fade=2) == None
+        assert await client.set_indicator(2, color=Color("#FF00FF"), fade=2) is None
 
 
 async def test_set_one_custom_application(
@@ -924,7 +924,7 @@ async def test_set_one_custom_application(
                     save=True,
                 ),
             )
-            == None
+            is None
         )
 
 
@@ -1025,7 +1025,7 @@ async def test_set_multiple_custom_application(
                     )
                 ],
             )
-            == None
+            is None
         )
 
 
@@ -1125,7 +1125,7 @@ async def test_notify(
                     clients=["http://test.fr"],
                 )
             )
-            == None
+            is None
         )
 
 
@@ -1138,7 +1138,7 @@ async def test_dismiss_notification(
     )
 
     async with awtrix_http_client as client:
-        assert await client.dismiss_notification() == None
+        assert await client.dismiss_notification() is None
 
 
 async def test_next_app(
@@ -1150,7 +1150,7 @@ async def test_next_app(
     )
 
     async with awtrix_http_client as client:
-        assert await client.next_app() == None
+        assert await client.next_app() is None
 
 
 async def test_previous_app(
@@ -1162,7 +1162,7 @@ async def test_previous_app(
     )
 
     async with awtrix_http_client as client:
-        assert await client.previous_app() == None
+        assert await client.previous_app() is None
 
 
 async def test_switch_app(
@@ -1175,7 +1175,7 @@ async def test_switch_app(
     )
 
     async with awtrix_http_client as client:
-        assert await client.switch_app("time") == None
+        assert await client.switch_app("time") is None
 
 
 async def test_get_settings(
@@ -1277,7 +1277,7 @@ async def test_set_settings_all_params_optionnal(
     )
 
     async with awtrix_http_client as client:
-        assert await client.notify(Notification()) == None
+        assert await client.notify(Notification()) is None
 
 
 async def test_set_settings(
@@ -1370,7 +1370,7 @@ async def test_set_settings(
                     MATP=True,
                 )
             )
-            == None
+            is None
         )
 
 
@@ -1383,7 +1383,7 @@ async def test_update(
     )
 
     async with awtrix_http_client as client:
-        assert await client.update() == None
+        assert await client.update() is None
 
 
 async def test_reboot(
@@ -1395,7 +1395,7 @@ async def test_reboot(
     )
 
     async with awtrix_http_client as client:
-        assert await client.reboot() == None
+        assert await client.reboot() is None
 
 
 async def test_erase(
@@ -1407,7 +1407,7 @@ async def test_erase(
     )
 
     async with awtrix_http_client as client:
-        assert await client.erase() == None
+        assert await client.erase() is None
 
 
 async def test_reset_settings(
@@ -1419,4 +1419,4 @@ async def test_reset_settings(
     )
 
     async with awtrix_http_client as client:
-        assert await client.reset_settings() == None
+        assert await client.reset_settings() is None

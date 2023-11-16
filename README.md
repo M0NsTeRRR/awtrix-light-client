@@ -3,7 +3,7 @@ Python async HTTP client for [awtrix-light](https://github.com/Blueforcer/awtrix
 [![PyPI](https://img.shields.io/pypi/v/awtrix-light-client.svg)](https://pypi.python.org/pypi/awtrix-light-client)
 [![PyPI versions](https://img.shields.io/pypi/pyversions/awtrix-light-client.svg)](https://pypi.python.org/pypi/awtrix-light-client)
 [![Python test](https://github.com/M0NsTeRRR/awtrix-light-client/actions/workflows/test.yml/badge.svg)](https://github.com/M0NsTeRRR/awtrix-light-client/actions/workflows/test.yml)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
 # Warning
 This client has been tested with awtrix-light v0.90 use with caution as official dev documentation is not fully documented and can cause crash
@@ -36,7 +36,7 @@ AWTRIX_HTTP_CLIENT_AWTRIX="<AWTRIX CONFIG>"
     "base_url": "http://192.168.0.1",
     "username": "admin",
     "password": "password",
-    "verify_ssl": false,
+    "verify_ssl": false
 }
 ```
 `verify_ssl` used to verify https config (if accessing behind an HTTPS reverse proxy), can be `true`, `false`, or can point to a local ca bundle PEM encoded to validate local CA

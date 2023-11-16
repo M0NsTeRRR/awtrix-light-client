@@ -32,11 +32,12 @@ jobs:
         run: |
           export PATH="$PATH:$HOME/.local/bin"
           poetry install --with=dev
-      - name: Run pre-commit
+      - name: Run ruff
         run: |
           export PATH="$PATH:$HOME/.local/bin"
           source `poetry env info --path`/bin/activate
-          poetry run black .
+          poetry run ruff format --check . 
+          poetry run ruff check .
       - name: Run test
         run: |
           export PATH="$PATH:$HOME/.local/bin"
