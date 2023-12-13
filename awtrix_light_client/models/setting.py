@@ -5,7 +5,7 @@ from pydantic_extra_types.color import Color
 from pydantic import BaseModel, Field, field_validator, field_serializer
 
 from .transition import TransitionType
-from .utils import convert_color_to_hex, as_hex
+from .utils import convert_color_to_hex
 
 
 class Settings(BaseModel):
@@ -107,6 +107,6 @@ class Settings(BaseModel):
     )
     def convert_color_to_int(v: Any) -> int:
         if isinstance(v, Color):
-            return int(as_hex(v, format="long")[1:], 16)
+            return int(v.as_hex(format="long")[1:], 16)
         else:
             return v

@@ -6,7 +6,7 @@ from pydantic.networks import Annotated, Url, UrlConstraints
 from pydantic_extra_types.color import Color
 
 from .effect import EffectType, EffectSetting
-from .utils import convert_color_to_hex, convert_colors_to_hex
+from .utils import convert_color_to_hex
 
 
 class TextCase(IntEnum):
@@ -233,7 +233,7 @@ class BaseApplication(BaseModel):
     @field_serializer("color", "gradient", "background", "progressC", "progressBC")
     def convert_color_to_hex(v: Union[List[Color], Color]) -> Union[List, str]:
         if isinstance(v, List):
-            return convert_colors_to_hex(v)
+            return [convert_color_to_hex(color) for color in v]
         else:
             return convert_color_to_hex(v)
 

@@ -15,8 +15,6 @@ from .models.moodlight import Moodlight
 from .models.application import CustomApplication, Notification
 from .models.setting import Settings
 
-from .models.utils import as_hex
-
 
 class AwtrixLightHttpClientError(BaseException):
     def __init__(self, status_code: int, content: str, *args: object) -> None:
@@ -138,7 +136,7 @@ class AwtrixLightHttpClient:
         if blink and fade:
             raise ValueError("fade and blink can't be set together")
 
-        data = {"color": as_hex(color, format="long").upper()}
+        data = {"color": color.as_hex(format="long").upper()}
 
         if blink:
             data["blink"] = blink
