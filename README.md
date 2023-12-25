@@ -65,10 +65,19 @@ asyncio.run(main())
 poetry run pytest --cov
 ```
 
-### Run black
+### Run ruff
 ```
-poetry run black .
+poetry run ruff format . 
+poetry run ruff check .
 ```
+
+## Contributing
+
+We welcome and encourage contributions to this project! Please read the [Contributing guide](CONTRIBUTING.md). Also make sure to check the [Code of Conduct](CODE_OF_CONDUCT.md) and adhere to its guidelines
+
+# Security
+
+See [SECURITY.md](SECURITY.md) file for details.
 
 # Licence
 
