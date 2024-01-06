@@ -25,7 +25,7 @@ async def test_works_no_auth(monkeypatch):
 async def test_works_auth(monkeypatch):
     monkeypatch.setenv(
         "AWTRIX_HTTP_CLIENT_AWTRIX",
-        '{"base_url": "http://test.fr", "auth": "username", "password": "password"}',
+        '{"base_url": "http://test.fr", "username": "username", "password": "password"}',
     )
 
     AwtrixLightHttpClientSettings()
