@@ -41,6 +41,8 @@ AWTRIX_HTTP_CLIENT_AWTRIX="<AWTRIX CONFIG>"
 ```
 `verify_ssl` used to verify https config (if accessing behind an HTTPS reverse proxy), can be `true`, `false`, or can point to a local ca bundle PEM encoded to validate local CA
 
+Environment variables can also be placed in a `.env` in the working directory.
+
 Example script
 ```py
 import asyncio
