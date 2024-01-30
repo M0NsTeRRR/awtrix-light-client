@@ -351,20 +351,20 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
 name = "pydantic-extra-types"
-version = "2.4.1"
+version = "2.5.0"
 description = "Extra Pydantic types."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pydantic_extra_types-2.4.1-py3-none-any.whl", hash = "sha256:b3cec735e471b1234a1cc05a680dc080836bab6970cab40d60dcade97fe68f5d"},
-    {file = "pydantic_extra_types-2.4.1.tar.gz", hash = "sha256:63314096ca57bc1575d988d1a770d73af76aaebe684140f24333b60af4134a2c"},
+    {file = "pydantic_extra_types-2.5.0-py3-none-any.whl", hash = "sha256:7346873019cac32061b471adf2cdac711664ddb7a6ede04219bed2da34888c4d"},
+    {file = "pydantic_extra_types-2.5.0.tar.gz", hash = "sha256:46b85240093dc63ad4a8f3cab49e03d76ae0577e4f99e2bbff7d32f99d009bf9"},
 ]
 
 [package.dependencies]
 pydantic = ">=2.5.2"
 
 [package.extras]
-all = ["phonenumbers (>=8,<9)", "pycountry (>=23,<24)", "python-ulid (>=1,<2)"]
+all = ["pendulum (>=3.0.0,<4.0.0)", "phonenumbers (>=8,<9)", "pycountry (>=23,<24)", "python-ulid (>=1,<2)"]
 
 [[package]]
 name = "pydantic-settings"
@@ -533,4 +533,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9"
-content-hash = "48b8459fff6ea6d01754c4d047ea056a7f839fc5a4605753f73e771570f803cd"
+content-hash = "b5213cf95a59baefd54512347de607da5aa3608980e6fe2d2311bda5a7d50bea"
