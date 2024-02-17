@@ -23,3 +23,11 @@ jobs:
           source `poetry env info --path`/bin/activate
           poetry version $(git describe --tags --abbrev=0)
           poetry publish --build -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
+      - name: Deploy documentation
+        run: |
+          export PATH="$PATH:$HOME/.local/bin"
+          source `poetry env info --path`/bin/activate
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          poetry run mike deploy --push --update-aliases $(git describe --tags --abbrev=0) latest
+          poetry run mike set-default --push latest

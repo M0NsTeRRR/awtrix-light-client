@@ -5,6 +5,14 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class AwtrixHttpConfig(BaseModel):
+    """Base model representing API configuration
+
+    :param base_url: Base URL of API
+    :param username: username when using HTTP basic auth
+    :param password: password when using HTTP basic auth
+    :param verify: SSL certificates (a.k.a CA bundle) used to verify the identity of requested hosts. Either True (default CA bundle), a path to an SSL certificate file, or False (which will disable verification).
+    """
+
     base_url: AnyHttpUrl
     username: str = None
     password: str = None

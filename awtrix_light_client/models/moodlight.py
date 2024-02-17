@@ -5,6 +5,12 @@ from .utils import convert_color_to_hex
 
 
 class Moodlight(BaseModel):
+    """Moodlight
+    :param brightness: matrix custom brightness
+    :param kelvin: matrix custom temperature
+    :param color: matrix custom color
+    """
+
     brightness: int = None
     kelvin: int = None
     color: Color = None

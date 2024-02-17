@@ -9,6 +9,44 @@ from .utils import convert_color_to_hex
 
 
 class Settings(BaseModel):
+    """Settings
+
+    :param ATIME: Duration an app is displayed in seconds.
+    :param TEFF: Choose between app transition effects.
+    :param TSPEED: Time taken for the transition to the next app in milliseconds.
+    :param TCOL: Global text color.
+    :param TMODE: Changes the time app style.
+    :param CHCOL: Calendar header color of the time app.
+    :param CBCOL: Calendar body color of the time app.
+    :param CTCOL: Calendar text color in the time app.
+    :param WD: Enable or disable the weekday display.
+    :param WDCA: Active weekday color.
+    :param WDCI: Inactive weekday color.
+    :param BRI: Matrix brightness.
+    :param ABRI: Automatic brightness control.
+    :param ATRANS: Automatic switching to the next app.
+    :param CCORRECTION: Color correction for the matrix.
+    :param CTEMP: Color temperature for the matrix.
+    :param TFORMAT: Time format for the TimeApp.
+    :param DFORMAT: Date format for the DateApp.
+    :param SOM: Start the week on Monday.
+    :param BLOCKN: Block physical navigation keys (still sends input to MQTT).
+    :param UPPERCASE: Display text in uppercase.
+    :param TIME_COL: Text color of the time app. Use 0 for global text color.
+    :param DATE_COL: Text color of the date app. Use 0 for global text color.
+    :param TEMP_COL: Text color of the temperature app. Use 0 for global text color.
+    :param HUM_COL: Text color of the humidity app. Use 0 for global text color.
+    :param BAT_COL: Text color of the battery app. Use 0 for global text color.
+    :param SSPEED: Scroll speed modification.
+    :param TIM: Enable or disable the native time app (requires reboot).
+    :param DAT: Enable or disable the native date app (requires reboot).
+    :param HUM: Enable or disable the native humidity app (requires reboot).
+    :param TEMP: Enable or disable the native temperature app (requires reboot).
+    :param BAT: Enable or disable the native battery app (requires reboot).
+    :param MATP: Enable or disable the matrix. Similar to `power` Endpoint but without the animation.
+    :param VOL: Allows to set the Volume of the DFplayer (Only for old AWTRIX2.0 upgrades)
+    """
+
     ATIME: int = Field(default=None, ge=0)
     TEFF: TransitionType = None
     TSPEED: int = Field(default=None, ge=0)
