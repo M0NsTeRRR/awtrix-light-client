@@ -1,0 +1,98 @@
+site_name: Awtrix-light client docs
+site_url: https://M0NsTeRRR.github.io/awtrix-light-client
+site_author: Ludovic Ortega
+site_description: >-
+  Awtrix-light client docs
+repo_url: https://github.com/M0NsTeRRR/awtrix-light-client
+copyright: Copyright © Ludovic Ortega, 2023
+edit_uri: edit/main/docs/
+extra:
+  version:
+    provider: mike
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: deep purple
+      scheme: slate
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: deep purple
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: deep purple
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - announce.dismiss
+    - navigation.tabs
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+      title: Page contents
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      pygments_lang_class: true
+  - pymdownx.extra
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+
+watch:
+- awtrix_light_client
+
+plugins:
+  - search
+  - privacy
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            docstring_style: sphinx
+            show_root_heading: true
+            members_order: source
+            separate_signature: true
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+
+nav:
+  - Home:
+    - index.md
+  - API Documentation:
+    - Client: api/client.md
+    - Models:
+        - Application: api/models/application.md
+        - Effect: api/models/effect.md
+        - Loop: api/models/loop.md
+        - Moodlight: api/models/moodlight.md
+        - Screen: api/models/screen.md
+        - Setting: api/models/setting.md
+        - Stat: api/models/stat.md
+        - Transition: api/models/transition.md
+        - Utils: api/models/utils.md
+    - Settings: api/settings.md
+    - Exceptions: api/exceptions.md

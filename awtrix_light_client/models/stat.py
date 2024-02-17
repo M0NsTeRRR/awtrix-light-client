@@ -2,6 +2,11 @@ from pydantic import BaseModel
 
 
 class Stats(BaseModel):
+    """Statistics
+
+    :param bat: _description_
+    """
+
     bat: int
     bat_raw: int
     type: int
