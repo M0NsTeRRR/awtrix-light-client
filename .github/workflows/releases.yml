@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - '*'
+permissions:
+  contents: write
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -28,6 +30,6 @@ jobs:
           export PATH="$PATH:$HOME/.local/bin"
           source `poetry env info --path`/bin/activate
           git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.email github-actions[bot]@users.noreply.github.com
           poetry run mike deploy --push --update-aliases $(git describe --tags --abbrev=0) latest
           poetry run mike set-default --push latest
