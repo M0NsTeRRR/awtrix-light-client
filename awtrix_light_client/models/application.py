@@ -1,4 +1,4 @@
-from typing import List, Union, Any, Optional
+from typing import List, Union, Optional
 from enum import IntEnum
 
 from pydantic import BaseModel, Field, model_validator, field_serializer
@@ -134,7 +134,7 @@ class Df(BaseModel):
 
 
 class Dc(BaseModel):
-    """Draw a circle 
+    """Draw a circle
     :param x: Circle center x axis
     :param y: Circle center y axis
     :param r: Radius
@@ -157,7 +157,7 @@ class Dc(BaseModel):
 
 
 class Dfc(BaseModel):
-    """Draw a filled circle 
+    """Draw a filled circle
     :param x: Circle center x axis
     :param y: Circle center y axis
     :param r: Radius
@@ -279,6 +279,7 @@ class BaseApplication(BaseModel):
     :param effect: Shows an effect as background.The effect can be removed by sending an empty string for effect.
     :param effectSettings: Changes color and speed of the effect.
     """
+
     text: Optional[Union[str, List[Fragment]]] = None
     textCase: Optional[TextCase] = None
     topText: Optional[bool] = None
@@ -353,6 +354,7 @@ class CustomApplication(BaseApplication):
     :param lifetimeMode: 0 = deletes the app, 1 = marks it as staled with a red rectangle around the app
     :param save: Saves your custom app into flash and reloads it after boot. Avoid this for custom apps with high update frequencies because the ESP's flash memory has limited write cycles.
     """
+
     pos: Optional[int] = Field(default=None, ge=0)
     lifetime: Optional[int] = Field(default=None, ge=0)
     lifetimeMode: Optional[LifeTimeMode] = None
@@ -366,7 +368,7 @@ CLIENT_TYPE = Annotated[
 
 class Notification(BaseApplication):
     """Notification
- 
+
     :param hold: Set it to true, to hold your notification on top until you press the middle button or dismiss it via HomeAssistant. This key only belongs to notification.
     :param sound: The filename of your RTTTL ringtone file placed in the MELODIES folder (without extension).
     :param rtttl: Allows to send the RTTTL sound string with the json.
@@ -375,6 +377,7 @@ class Notification(BaseApplication):
     :param wakeup: If the Matrix is off, the notification will wake it up for the time of the notification.
     :param clients: Allows forwarding a notification to other awtrix devices. Use the MQTT prefix for MQTT and IP addresses for HTTP.
     """
+
     hold: Optional[bool] = None
     sound: Optional[str] = None
     rtttl: Optional[str] = None
