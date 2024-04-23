@@ -28,7 +28,7 @@ python = ">=3.9"
 httpx = "~0.25.0"
 pydantic = ">=2.5.1,<2.8.0"
 pydantic-settings = ">=2.1,<2.3"
-pydantic-extra-types = ">=2.2,<2.7"
+pydantic-extra-types = ">=2.2,<2.8"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~7.4.3"
