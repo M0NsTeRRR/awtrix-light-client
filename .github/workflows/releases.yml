@@ -29,6 +29,7 @@ jobs:
         run: |
           export PATH="$PATH:$HOME/.local/bin"
           source `poetry env info --path`/bin/activate
+          git fetch origin gh-pages --depth=1
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           poetry run mike deploy --push --update-aliases $(git describe --tags --abbrev=0) latest
