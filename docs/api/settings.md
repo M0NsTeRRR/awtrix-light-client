@@ -1,1 +1,1 @@
-::: awtrix_light_client.http_settings.AwtrixHttpConfig
+::: src.awtrix_light_client.http_settings.AwtrixHttpConfig

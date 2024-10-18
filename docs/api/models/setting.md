@@ -1,1 +1,1 @@
-::: awtrix_light_client.models.setting.Settings
+::: src.awtrix_light_client.models.setting.Settings

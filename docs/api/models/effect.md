@@ -1,5 +1,5 @@
-::: awtrix_light_client.models.effect.Palette
+::: src.awtrix_light_client.models.effect.Palette
 
-::: awtrix_light_client.models.effect.EffectType
+::: src.awtrix_light_client.models.effect.EffectType
 
-::: awtrix_light_client.models.effect.EffectSetting
+::: src.awtrix_light_client.models.effect.EffectSetting
