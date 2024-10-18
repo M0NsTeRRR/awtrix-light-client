@@ -61,7 +61,7 @@ markdown_extensions:
       alternate_style: true
 
 watch:
-- awtrix_light_client
+- src/awtrix_light_client
 
 plugins:
   - search

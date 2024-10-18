@@ -1,1 +1,1 @@
-::: awtrix_light_client.models.loop.Loop
+::: src.awtrix_light_client.models.loop.Loop

@@ -1,1 +1,1 @@
-::: awtrix_light_client.models.screen.Screen
+::: src.awtrix_light_client.models.screen.Screen
