@@ -1,0 +1,36 @@
+name: Python release
+on:
+  push:
+    tags:
+      - '*'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+      - name: Install the project
+        run: uv sync --all-extras
+      - name: Publish package
+        run: |
+          sed -i -e "s/0.0.0/${GITHUB_REF#refs/*/}/" pyproject.toml
+          uv build
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Deploy documentation
+        run: |
+          git fetch origin gh-pages --depth=1
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          uv run mike deploy --push --update-aliases $(git describe --tags --abbrev=0) latest
+          uv run mike set-default --push latest

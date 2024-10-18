@@ -12,23 +12,19 @@ This client has been tested with awtrix-light v0.90 use with caution as official
 [https://M0NsTeRRR.github.io/awtrix-light-client](https://M0NsTeRRR.github.io/awtrix-light-client)
 
 # Dev
-Install [Poetry](https://python-poetry.org/docs/master/#installing-with-the-official-installer)
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-Install and setup dependencies
-```
-poetry install
-poetry shell
-```
+Install and setup dependencies with `uv sync`
 
 ### Run unit test
 ```
-poetry run pytest --cov
+uv run pytest --cov
 ```
 
 ### Run ruff
 ```
-poetry run ruff format . 
-poetry run ruff check .
+uv run ruff format . 
+uv run ruff check .
 ```
 
 ## Contributing
