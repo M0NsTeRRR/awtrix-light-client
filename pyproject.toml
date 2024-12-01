@@ -32,6 +32,7 @@ Homepage = "https://github.com/M0NsTeRRR/awtrix-light-client"
 Repository = "https://github.com/M0NsTeRRR/awtrix-light-client"
 Issues = "https://github.com/M0NsTeRRR/awtrix-light-client/issues"
 Documentation = "https://m0nsterrr.github.io/awtrix-light-client/latest/"
+Funding = "https://ko-fi.com/ludovicortega"
 
 [project.optional-dependencies]
 dev = [
