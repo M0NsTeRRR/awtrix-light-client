@@ -2,7 +2,8 @@ from typing import List, Union, Optional
 from enum import IntEnum
 
 from pydantic import BaseModel, Field, model_validator, field_serializer
-from pydantic.networks import Annotated, Url, UrlConstraints
+from pydantic.networks import Annotated, UrlConstraints
+from pydantic_core import Url
 from pydantic_extra_types.color import Color
 
 from .effect import EffectType, EffectSetting
