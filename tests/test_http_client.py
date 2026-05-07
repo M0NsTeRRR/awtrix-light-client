@@ -6,29 +6,29 @@ from pydantic_extra_types.color import Color
 from pytest_httpx import HTTPXMock
 
 from awtrix_light_client.http_client import AwtrixLightHttpClient
-from awtrix_light_client.models.stat import Stats
-from awtrix_light_client.models.effect import EffectSetting, EffectType, Palette
-from awtrix_light_client.models.transition import TransitionType
-from awtrix_light_client.models.loop import Loop
-from awtrix_light_client.models.screen import Screen
-from awtrix_light_client.models.moodlight import Moodlight
-from awtrix_light_client.models.setting import Settings
 from awtrix_light_client.models.application import (
     CustomApplication,
-    Notification,
-    Fragment,
-    TextCase,
-    PushIcon,
-    LifeTimeMode,
-    Dp,
-    Dl,
-    Dr,
-    Df,
-    Dc,
-    Dfc,
-    Dt,
     Db,
+    Dc,
+    Df,
+    Dfc,
+    Dl,
+    Dp,
+    Dr,
+    Dt,
+    Fragment,
+    LifeTimeMode,
+    Notification,
+    PushIcon,
+    TextCase,
 )
+from awtrix_light_client.models.effect import EffectSetting, EffectType, Palette
+from awtrix_light_client.models.loop import Loop
+from awtrix_light_client.models.moodlight import Moodlight
+from awtrix_light_client.models.screen import Screen
+from awtrix_light_client.models.setting import Settings
+from awtrix_light_client.models.stat import Stats
+from awtrix_light_client.models.transition import TransitionType
 
 BASE_URL = "http://test/api/"
 

@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
+
 import pytest
 
 from awtrix_light_client.http_client import (

@@ -1,12 +1,11 @@
-from typing import List, Union, Optional
 from enum import IntEnum
 
-from pydantic import BaseModel, Field, model_validator, field_serializer
+from pydantic import BaseModel, Field, field_serializer, model_validator
 from pydantic.networks import Annotated, UrlConstraints
 from pydantic_core import Url
 from pydantic_extra_types.color import Color
 
-from .effect import EffectType, EffectSetting
+from .effect import EffectSetting, EffectType
 from .utils import convert_color_to_hex
 
 
@@ -216,7 +215,7 @@ class Db(BaseModel):
     y: int
     w: int
     h: int
-    bmp: List[str]
+    bmp: list[str]
 
     # bmp: Union[bytes, bytearray, memoryview] need to generate pydantic schema, leaving it for now
 
@@ -281,32 +280,32 @@ class BaseApplication(BaseModel):
     :param effectSettings: Changes color and speed of the effect.
     """
 
-    text: Optional[Union[str, List[Fragment]]] = None
-    textCase: Optional[TextCase] = None
-    topText: Optional[bool] = None
-    textOffset: Optional[int] = Field(default=None, ge=0)
-    center: Optional[bool] = None
-    color: Optional[Color] = None
-    gradient: Optional[List[Color]] = Field(default=None, min_length=2, max_length=2)
-    blinkText: Optional[int] = None
-    fadeText: Optional[int] = None
-    background: Optional[Color] = None
-    rainbow: Optional[bool] = None
-    icon: Optional[str] = None
-    pushIcon: Optional[PushIcon] = None
-    repeat: Optional[int] = Field(default=None, ge=-1)
-    duration: Optional[int] = Field(default=None, ge=1)
-    bar: Optional[List[int]] = Field(default=None, max_length=16)
-    line: Optional[List[int]] = Field(default=None, max_length=16)
-    autoscale: Optional[bool] = None
-    progress: Optional[int] = Field(default=None, ge=-1, le=100)
-    progressC: Optional[Color] = None
-    progressBC: Optional[Color] = None
-    draw: Optional[List[Union[Dp, Dl, Dr, Df, Dc, Dfc, Dt, Db]]] = None
-    noScroll: Optional[bool] = None
-    scrollSpeed: Optional[int] = Field(default=None, ge=0, le=100)
-    effect: Optional[EffectType] = None
-    effectSettings: Optional[EffectSetting] = None
+    text: str | list[Fragment] | None = None
+    textCase: TextCase | None = None
+    topText: bool | None = None
+    textOffset: int | None = Field(default=None, ge=0)
+    center: bool | None = None
+    color: Color | None = None
+    gradient: list[Color] | None = Field(default=None, min_length=2, max_length=2)
+    blinkText: int | None = None
+    fadeText: int | None = None
+    background: Color | None = None
+    rainbow: bool | None = None
+    icon: str | None = None
+    pushIcon: PushIcon | None = None
+    repeat: int | None = Field(default=None, ge=-1)
+    duration: int | None = Field(default=None, ge=1)
+    bar: list[int] | None = Field(default=None, max_length=16)
+    line: list[int] | None = Field(default=None, max_length=16)
+    autoscale: bool | None = None
+    progress: int | None = Field(default=None, ge=-1, le=100)
+    progressC: Color | None = None
+    progressBC: Color | None = None
+    draw: list[Dp | Dl | Dr | Df | Dc | Dfc | Dt | Db] | None = None
+    noScroll: bool | None = None
+    scrollSpeed: int | None = Field(default=None, ge=0, le=100)
+    effect: EffectType | None = None
+    effectSettings: EffectSetting | None = None
 
     class ConfigDict:
         use_enum_values = True
@@ -340,8 +339,8 @@ class BaseApplication(BaseModel):
         return self
 
     @field_serializer("color", "gradient", "background", "progressC", "progressBC")
-    def convert_color_to_hex(v: Union[List[Color], Color]) -> Union[List, str]:
-        if isinstance(v, List):
+    def convert_color_to_hex(v: list[Color] | Color) -> list | str:
+        if isinstance(v, list):
             return [convert_color_to_hex(color) for color in v]
         else:
             return convert_color_to_hex(v)
@@ -356,10 +355,10 @@ class CustomApplication(BaseApplication):
     :param save: Saves your custom app into flash and reloads it after boot. Avoid this for custom apps with high update frequencies because the ESP's flash memory has limited write cycles.
     """
 
-    pos: Optional[int] = Field(default=None, ge=0)
-    lifetime: Optional[int] = Field(default=None, ge=0)
-    lifetimeMode: Optional[LifeTimeMode] = None
-    save: Optional[bool] = None
+    pos: int | None = Field(default=None, ge=0)
+    lifetime: int | None = Field(default=None, ge=0)
+    lifetimeMode: LifeTimeMode | None = None
+    save: bool | None = None
 
 
 CLIENT_TYPE = Annotated[
@@ -379,13 +378,13 @@ class Notification(BaseApplication):
     :param clients: Allows forwarding a notification to other awtrix devices. Use the MQTT prefix for MQTT and IP addresses for HTTP.
     """
 
-    hold: Optional[bool] = None
-    sound: Optional[str] = None
-    rtttl: Optional[str] = None
-    loopSound: Optional[bool] = None
-    stack: Optional[bool] = None
-    wakeup: Optional[bool] = None
-    clients: Optional[List[CLIENT_TYPE]] = None
+    hold: bool | None = None
+    sound: str | None = None
+    rtttl: str | None = None
+    loopSound: bool | None = None
+    stack: bool | None = None
+    wakeup: bool | None = None
+    clients: list[CLIENT_TYPE] | None = None
 
     @model_validator(mode="after")
     def check_constraint_sound_rtttl(self) -> "Notification":
@@ -394,5 +393,5 @@ class Notification(BaseApplication):
         return self
 
     @field_serializer("clients")
-    def convert_url_to_str(clients: CLIENT_TYPE) -> List[str]:
+    def convert_url_to_str(clients: list[CLIENT_TYPE]) -> list[str]:
         return [str(client) for client in clients]

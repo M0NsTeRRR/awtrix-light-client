@@ -1,8 +1,7 @@
-from typing import Any
-from typing import Literal, Union
+from typing import Any, Literal
 
+from pydantic import BaseModel, Field, field_serializer, field_validator
 from pydantic_extra_types.color import Color
-from pydantic import BaseModel, Field, field_validator, field_serializer
 
 from .transition import TransitionType
 from .utils import convert_color_to_hex
@@ -47,69 +46,75 @@ class Settings(BaseModel):
     :param VOL: Allows to set the Volume of the DFplayer (Only for old AWTRIX2.0 upgrades)
     """
 
-    ATIME: int = Field(default=None, ge=0)
-    TEFF: TransitionType = None
-    TSPEED: int = Field(default=None, ge=0)
-    TCOL: Union[Color, int] = None
-    TMODE: int = Field(default=None, ge=0, le=4)
-    CHCOL: Union[Color, int] = None
-    CBCOL: Union[Color, int] = None
-    CTCOL: Union[Color, int] = None
-    WD: bool = None
-    WDCA: Union[Color, int] = None
-    WDCI: Union[Color, int] = None
+    ATIME: int | None = Field(default=None, ge=0)
+    TEFF: TransitionType | None = None
+    TSPEED: int | None = Field(default=None, ge=0)
+    TCOL: Color | int | None = None
+    TMODE: int | None = Field(default=None, ge=0, le=4)
+    CHCOL: Color | int | None = None
+    CBCOL: Color | int | None = None
+    CTCOL: Color | int | None = None
+    WD: bool | None = None
+    WDCA: Color | int | None = None
+    WDCI: Color | int | None = None
     BRI: int = Field(default=0, ge=0, le=255)
-    ABRI: bool = None
-    ATRANS: bool = None
-    CCORRECTION: Union[Color, str] = None
-    CTEMP: Union[Color, str] = None
-    TFORMAT: Literal[
-        "%H:%M:%S",
-        "%l:%M:%S",
-        "%H:%M",
-        "%H %M",
-        "%l:%M",
-        "%l %M",
-        "%l:%M %p",
-        "%l %M %p",
-    ] = None
-    DFORMAT: Literal[
-        "%d.%m.%y",
-        "%d.%m",
-        "%y-%m-%d",
-        "%m-%d",
-        "%m/%d/%y",
-        "%m/%d",
-        "%d/%m/%y",
-        "%d/%m",
-        "%m-%d-%y",
-    ] = None
-    SOM: bool = None
-    CEL: bool = None
-    MAT: int = None
-    SOUND: bool = None
-    GAMMA: float = None
-    BLOCKN: bool = None
-    UPPERCASE: bool = None
-    TIME_COL: Union[Color, Literal[0]] = None
-    DATE_COL: Union[Color, Literal[0]] = None
-    TEMP_COL: Union[Color, Literal[0]] = None
-    HUM_COL: Union[Color, Literal[0]] = None
-    BAT_COL: Union[Color, Literal[0]] = None
-    SSPEED: int = Field(default=None, ge=0, le=100)
-    TIM: bool = None
-    DAT: bool = None
-    HUM: bool = None
-    TEMP: bool = None
-    BAT: bool = None
-    MATP: bool = None
+    ABRI: bool | None = None
+    ATRANS: bool | None = None
+    CCORRECTION: Color | str | None = None
+    CTEMP: Color | str | None = None
+    TFORMAT: (
+        Literal[
+            "%H:%M:%S",
+            "%l:%M:%S",
+            "%H:%M",
+            "%H %M",
+            "%l:%M",
+            "%l %M",
+            "%l:%M %p",
+            "%l %M %p",
+        ]
+        | None
+    ) = None
+    DFORMAT: (
+        Literal[
+            "%d.%m.%y",
+            "%d.%m",
+            "%y-%m-%d",
+            "%m-%d",
+            "%m/%d/%y",
+            "%m/%d",
+            "%d/%m/%y",
+            "%d/%m",
+            "%m-%d-%y",
+        ]
+        | None
+    ) = None
+    SOM: bool | None = None
+    CEL: bool | None = None
+    MAT: int | None = None
+    SOUND: bool | None = None
+    GAMMA: float | None = None
+    BLOCKN: bool | None = None
+    UPPERCASE: bool | None = None
+    TIME_COL: Color | Literal[0] | None = None
+    DATE_COL: Color | Literal[0] | None = None
+    TEMP_COL: Color | Literal[0] | None = None
+    HUM_COL: Color | Literal[0] | None = None
+    BAT_COL: Color | Literal[0] | None = None
+    SSPEED: int | None = Field(default=None, ge=0, le=100)
+    TIM: bool | None = None
+    DAT: bool | None = None
+    HUM: bool | None = None
+    TEMP: bool | None = None
+    BAT: bool | None = None
+    MATP: bool | None = None
 
     class ConfigDict:
         use_enum_values = True
 
     @field_validator("CCORRECTION", "CTEMP", mode="before")
     @classmethod
-    def convert_str_to_color(cls, v: Union[Color, str]) -> Color:
+    def convert_str_to_color(cls, v: Color | str) -> Color:
         if isinstance(v, str):
             return Color(v)
         else:
@@ -117,14 +122,14 @@ class Settings(BaseModel):
 
     @field_validator("TCOL", "CHCOL", "CBCOL", "CTCOL", "WDCA", "WDCI", mode="before")
     @classmethod
-    def convert_integer_to_color(cls, v: Union[Color, int]) -> Color:
+    def convert_integer_to_color(cls, v: Color | int) -> Color:
         if isinstance(v, int):
             return Color("{0:06X}".format(v))
         else:
             return v
 
     @field_serializer("CCORRECTION", "CTEMP")
-    def convert_color_to_hex(v: Union[Color, str]) -> str:
+    def convert_color_to_hex(v: Color | str) -> str:
         if isinstance(v, Color):
             return convert_color_to_hex(v)
         else:

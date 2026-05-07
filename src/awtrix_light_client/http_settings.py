@@ -1,6 +1,4 @@
-from typing import Union
-
-from pydantic import BaseModel, AnyHttpUrl, FilePath
+from pydantic import AnyHttpUrl, BaseModel, FilePath
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,9 +12,9 @@ class AwtrixHttpConfig(BaseModel):
     """
 
     base_url: AnyHttpUrl
-    username: str = None
-    password: str = None
-    verify_ssl: Union[bool, FilePath] = False
+    username: str | None = None
+    password: str | None = None
+    verify_ssl: bool | FilePath = False
 
 
 class AwtrixLightHttpClientSettings(BaseSettings):

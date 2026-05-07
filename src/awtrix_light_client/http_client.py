@@ -1,19 +1,20 @@
-from typing import Dict, Any, List, Union, Literal
+import ssl
 from contextlib import asynccontextmanager
-from typing import AsyncIterator
+from pathlib import PurePath
+from typing import Any, AsyncIterator, Literal
 
 from httpx import AsyncClient
 from pydantic_extra_types.color import Color
 
 from .http_settings import AwtrixLightHttpClientSettings
-from .models.stat import Stats
-from .models.effect import EffectType
-from .models.transition import TransitionType
-from .models.loop import Loop
-from .models.screen import Screen
-from .models.moodlight import Moodlight
 from .models.application import CustomApplication, Notification
+from .models.effect import EffectType
+from .models.loop import Loop
+from .models.moodlight import Moodlight
+from .models.screen import Screen
 from .models.setting import Settings
+from .models.stat import Stats
+from .models.transition import TransitionType
 
 
 class AwtrixLightHttpClientError(BaseException):
@@ -29,6 +30,16 @@ class AwtrixLightHttpClientError(BaseException):
         self.content = content
 
 
+def _normalize_verify(verify: PurePath | str | bool) -> ssl.SSLContext | bool:
+    if isinstance(verify, PurePath):
+        verify = str(verify)
+
+    if isinstance(verify, str):
+        return ssl.create_default_context(cafile=verify)
+
+    return verify
+
+
 class AwtrixLightHttpClient:
     def __init__(self, client: AsyncClient) -> None:
         """
@@ -40,16 +51,14 @@ class AwtrixLightHttpClient:
         self,
         method: str,
         url: str,
-        params: Dict[Any, Any] = None,
-        data: Dict[Any, Any] = None,
+        params: dict[Any, Any] | None = None,
+        data: dict[Any, Any] | None = None,
     ):
         """Boilerplate to make request to the APU. Handling error is done for you here."""
         r = await self._client.request(method, url, params=params, json=data)
 
         if not r.is_success:
-            raise AwtrixLightHttpClientError(
-                status_code=r.status_code, content=r.content
-            )
+            raise AwtrixLightHttpClientError(status_code=r.status_code, content=r.text)
         return r
 
     async def get_stats(self) -> Stats:
@@ -61,18 +70,18 @@ class AwtrixLightHttpClient:
 
         return Stats(**response)
 
-    async def get_effects(self) -> List[EffectType]:
+    async def get_effects(self) -> list[EffectType]:
         """
-        List of all effects
+        list of all effects
         :return: Return a list of `EffectType` object
         """
         response = (await self._make_request("GET", "effects")).json()
 
         return [EffectType(e) for e in response]
 
-    async def get_transitions(self) -> List[TransitionType]:
+    async def get_transitions(self) -> list[TransitionType]:
         """
-        List of all transition effects
+        list of all transition effects
         :return: Return a list of `TransitionType` object
         """
         response = (await self._make_request("GET", "transitions")).json()
@@ -81,7 +90,7 @@ class AwtrixLightHttpClient:
 
     async def get_loops(self) -> Loop:
         """
-        List of all apps in the loop
+        list of all apps in the loop
         :return: Return a `Loop` object
         """
         response = (await self._make_request("GET", "loop")).json()
@@ -140,8 +149,8 @@ class AwtrixLightHttpClient:
         self,
         indicator: Literal[1, 2, 3],
         color: Color,
-        blink: int = None,
-        fade: int = None,
+        blink: int | None = None,
+        fade: int | None = None,
     ) -> None:
         """
         Colored indicators serve as small notification signs displayed on specific areas of the screen:
@@ -170,7 +179,7 @@ class AwtrixLightHttpClient:
     async def set_custom_application(
         self,
         name: str,
-        custom_application: Union[CustomApplication, List[CustomApplication], None],
+        custom_application: CustomApplication | list[CustomApplication] | None,
     ) -> None:
         """
         Set custom app or a list of custom app
@@ -280,6 +289,6 @@ async def get_awtrix_http_client() -> AsyncIterator[AwtrixLightHttpClient]:
     async with AsyncClient(
         base_url=f"{settings.awtrix.base_url}api",
         auth=auth,
-        verify=settings.awtrix.verify_ssl,
+        verify=_normalize_verify(settings.awtrix.verify_ssl),
     ) as client:
         yield AwtrixLightHttpClient(client)

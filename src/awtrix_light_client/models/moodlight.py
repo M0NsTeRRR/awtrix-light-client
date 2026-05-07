@@ -1,4 +1,4 @@
-from pydantic import BaseModel, model_validator, field_serializer
+from pydantic import BaseModel, field_serializer, model_validator
 from pydantic_extra_types.color import Color
 
 from .utils import convert_color_to_hex
@@ -11,9 +11,9 @@ class Moodlight(BaseModel):
     :param color: matrix custom color
     """
 
-    brightness: int = None
-    kelvin: int = None
-    color: Color = None
+    brightness: int | None = None
+    kelvin: int | None = None
+    color: Color | None = None
 
     @model_validator(mode="after")
     def check_constraint_blink_text(self) -> "Moodlight":

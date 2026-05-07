@@ -1,5 +1,5 @@
-from pydantic import ValidationError
 import pytest
+from pydantic import ValidationError
 
 from awtrix_light_client.http_settings import AwtrixLightHttpClientSettings
 
